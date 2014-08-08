@@ -1,0 +1,18 @@
+- Default
+Dans ce mode on supprime tous les users, et on configure un AP sans authentification. Toutes les connxions http/https sont redirigées vers le seveur local qui permet la config de
+	- username
+	- hostapd / isc-dhcp-server
+
+- level0
+Nous avons ici une simple passerelle sans proxy. Il s'agit uniquement de faire du NAT
+
+- level1
+Ici on a un privoxy "light"
+
+- level2
+privoxy renforcé + unbound
+
+- level3
+privoxy renforcé + unbound + tor
+
+

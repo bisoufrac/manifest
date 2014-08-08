@@ -1,0 +1,5 @@
+
+user { 'katie':
+	ensure => absent,
+}
+

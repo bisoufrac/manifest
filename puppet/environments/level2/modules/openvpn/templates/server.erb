@@ -1,0 +1,98 @@
+mode server
+client-config-dir /etc/openvpn/<%= scope.lookupvar('name') %>/client-configs
+ca /etc/openvpn/<%= scope.lookupvar('name') %>/keys/ca.crt
+cert /etc/openvpn/<%= scope.lookupvar('name') %>/keys/<%= scope.lookupvar('common_name') %>.crt
+key /etc/openvpn/<%= scope.lookupvar('name') %>/keys/<%= scope.lookupvar('common_name') %>.key
+dh /etc/openvpn/<%= scope.lookupvar('name') %>/keys/dh<%= scope.lookupvar('ssl_key_size') %>.pem
+crl-verify /etc/openvpn/<%= scope.lookupvar('name') %>/crl.pem
+<% if scope.lookupvar('proto') == 'tcp' -%>
+proto <%= scope.lookupvar('proto') %>-server
+<% else -%>
+proto <%= scope.lookupvar('proto') %>
+<% end -%>
+port <%= scope.lookupvar('port') %>
+<% if scope.lookupvar('tls_server') -%>
+tls-server
+<% end -%>
+<% if scope.lookupvar('compression') != '' -%>
+<%= scope.lookupvar('compression') %>
+<% end -%>
+group <%= scope.lookupvar('group_to_set') %>
+user <%= scope.lookupvar('user') %>
+<% if scope.lookupvar('logfile') -%>
+log-append <%= scope.lookupvar('logfile') %>
+<% end -%>
+status <%= scope.lookupvar('status_log') %>
+dev <%= scope.lookupvar('dev') %>
+<% if scope.lookupvar('local') != '' -%>
+local <%= scope.lookupvar('local') %>
+<% end -%>
+<% if scope.lookupvar('ipp') -%>
+ifconfig-pool-persist <%= scope.lookupvar('name') %>/vpn-ipp.txt
+<% end -%>
+<% if scope.lookupvar('server') != '' -%>
+server <%= scope.lookupvar('server') %>
+<% end -%>
+<% if scope.lookupvar('server_ipv6') != '' -%>
+server-ipv6 <%= scope.lookupvar('server_ipv6') %>
+<% end -%>
+<% if scope.lookupvar('server_bridge') != '' -%>
+server-bridge <%= scope.lookupvar('server_bridge') %>
+<% end -%>
+<% scope.lookupvar('push').each do |item| -%>
+push "<%= item %>"
+<% end -%>
+<% scope.lookupvar('route').each do |item| -%>
+route <%= item %>
+<% end -%>
+<% if scope.lookupvar('keepalive') != '' -%>
+keepalive <%= scope.lookupvar('keepalive') %>
+<% end -%>
+<% if scope.lookupvar('topology') != '' -%>
+topology <%= scope.lookupvar('topology') %>
+<% end -%>
+<% if scope.lookupvar('verb') != '' -%>
+verb <%= scope.lookupvar('verb') %>
+<% end -%>
+<% if scope.lookupvar('cipher') != '' -%>
+cipher <%= scope.lookupvar('cipher') %>
+<% end -%>
+<% if scope.lookupvar('c2c') -%>
+client-to-client
+<% end -%>
+<% if scope.lookupvar('persist_key') -%>
+persist-key
+<% end -%>
+<% if scope.lookupvar('persist_tun') -%>
+persist-tun
+<% end -%>
+<% if scope.lookupvar('tcp_nodelay') -%>
+tcp-nodelay
+<% end -%>
+<% if scope.lookupvar('ccd_exclusive') -%>
+ccd-exclusive
+<% end -%>
+<% if scope.lookupvar('pam') -%>
+plugin /usr/lib/openvpn/openvpn-auth-pam.so login
+<% end -%>
+<% if scope.lookupvar('management') -%>
+management <%= scope.lookupvar('management_ip') %> <%= scope.lookupvar('management_port') %>
+<% end -%>
+<% if scope.lookupvar('up') != '' or scope.lookupvar('down') != ''-%>
+script-security 2
+<% end -%>
+<% if scope.lookupvar('up') != '' -%>
+up "<%= scope.lookupvar('up') %>"
+<% end -%>
+<% if scope.lookupvar('down') != '' -%>
+down "<%= scope.lookupvar('down') %>"
+<% end -%>
+<% if scope.lookupvar('username_as_common_name') -%>
+username-as-common-name
+<% end -%>
+<% if scope.lookupvar('ldap_enabled') == true -%>
+plugin <%= scope.lookupvar('::openvpn::params::ldap_auth_plugin_location') %> "/etc/openvpn/<%= name %>/auth/ldap.conf"
+<% end -%>
+<% if scope.lookupvar('client_cert_not_required') -%>
+client-cert-not-required
+<% end -%>

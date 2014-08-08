@@ -1,0 +1,16 @@
+<% scope.lookupvar('iroute').each do |iroute| -%>
+iroute <%= iroute %>
+<% end -%>
+<% if ifconfig = scope.lookupvar('ifconfig') -%>
+ifconfig-push <%= ifconfig %>
+<% end -%>
+<% scope.lookupvar('dhcp_options').each do |option| -%>
+push dhcp-option <%= option %>
+<% end -%>
+<% if @redirect_gateway -%>
+push redirect-gateway def1
+<% end -%>
+<% scope.lookupvar('route').each do |route| -%>
+push "route <%= route %>"
+<% end -%>
+

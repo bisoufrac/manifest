@@ -1,0 +1,39 @@
+client
+ca keys/ca.crt
+cert keys/<%= scope.lookupvar('name') %>.crt
+key keys/<%= scope.lookupvar('name') %>.key
+dev <%= scope.lookupvar('dev') %>
+proto <%= scope.lookupvar('proto') %>
+remote <%= scope.lookupvar('remote_host') %> <%= scope.lookupvar('port') %>
+<% if scope.lookupvar('compression') != '' -%>
+<%= scope.lookupvar('compression') %>
+<% end -%>
+resolv-retry <%= scope.lookupvar('resolv_retry') %>
+auth-retry <%= scope.lookupvar('auth_retry') %>
+<% if scope.lookupvar('nobind') -%>
+nobind
+<% end -%>
+<% if scope.lookupvar('persist_key') -%>
+persist-key
+<% end -%>
+<% if scope.lookupvar('persist_tun') -%>
+persist-tun
+<% end -%>
+<% if scope.lookupvar('cipher')  -%>
+cipher <%= scope.lookupvar('cipher') %>
+<% end %>
+<% if scope.lookupvar('mute_replay_warnings') -%>
+mute-replay-warnings
+<% end -%>
+ns-cert-type server
+verb <%= scope.lookupvar('verb') %>
+mute <%= scope.lookupvar('mute') %>
+<% if scope.lookupvar('pam') || scope.lookupvar('authuserpass') -%>
+auth-user-pass
+<% end -%>
+<% scope.lookupvar('setenv').each do |key, value| -%>
+setenv <%= key %> <%= value %>
+<% end -%>
+<% scope.lookupvar('setenv_safe').each do |key, value| -%>
+setenv_safe <%= key %> <%= value %>
+<% end -%>
