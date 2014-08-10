@@ -1,13 +1,5 @@
 # DHCP module for Puppet
-
-DHCP module for theforeman. Based on original DHCP module by ZLeslie, thanks
-to him for the original work.
-
 Installs and manages a DHCP server.
-
-## Dependencies
-
-* Native-type Concat module (https://github.com/onyxpoint/pupmod-concat)
 
 ## Features
 * Multiple subnet support
@@ -23,6 +15,7 @@ Define the server and the zones it will be responsible for.
         '1.0.10.in-addr.arpa',
         ],
       nameservers  => ['10.0.1.20'],
+      ntpservers   => ['us.pool.ntp.org'],
       interfaces   => ['eth0'],
       dnsupdatekey => "/etc/bind/keys.d/$ddnskeyname",
       require      => Bind::Key[ $ddnskeyname ],
@@ -53,4 +46,4 @@ Create host reservations.
 ## Contributors
 Zach Leslie <zach.leslie@gmail.com>
 Ben Hughes <git@mumble.org.uk>
-Greg Sutcliffe <greg.sutcliffe@gmail.com>
+

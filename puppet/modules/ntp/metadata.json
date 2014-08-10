@@ -1,12 +1,4 @@
 {
-  "name": "puppetlabs-ntp",
-  "version": "3.1.2",
-  "author": "Puppet Labs",
-  "summary": "NTP Module",
-  "license": "Apache Version 2.0",
-  "source": "git://github.com/puppetlabs/puppetlabs-ntp",
-  "project_page": "http://github.com/puppetlabs/puppetlabs-ntp",
-  "issues_url": "https://github.com/puppetlabs/puppetlabs-ntp/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -59,6 +51,13 @@
       ]
     },
     {
+      "operatingsystem": "Solaris",
+      "operatingsystemrelease": [
+        "10",
+        "11"
+      ]
+    },
+    {
       "operatingsystem": "AIX",
       "operatingsystemrelease": [
         "5.3",
@@ -70,18 +69,25 @@
   "requirements": [
     {
       "name": "pe",
-      "version_requirement": "3.3.x"
+      "version_requirement": ">= 3.2.0 < 3.4.0"
     },
     {
       "name": "puppet",
       "version_requirement": "3.x"
     }
   ],
+  "name": "puppetlabs-ntp",
+  "version": "3.1.0",
+  "source": "git://github.com/puppetlabs/puppetlabs-ntp",
+  "author": "Puppet Labs",
+  "license": "Apache Version 2.0",
+  "summary": "NTP Module",
   "description": "NTP Module for Debian, Ubuntu, CentOS, RHEL, OEL, Fedora, FreeBSD, ArchLinux and Gentoo.",
+  "project_page": "http://github.com/puppetlabs/puppetlabs-ntp",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.0.0"
+      "version_requirement": ">= 0.1.6"
     }
   ]
 }
